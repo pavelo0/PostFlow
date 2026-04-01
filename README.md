@@ -1,6 +1,7 @@
 # FastFlow / PostFlow
 
-Monorepo for **PostFlow** — a Telegram post scheduler (frontend + backend + docs).
+Monorepo for **PostFlow** — a Telegram post scheduler (frontend + backend +
+docs).
 
 ---
 
@@ -67,7 +68,8 @@ Key docs:
 
 - `docs/PostFlow_Overview.md` — product overview, MVP, strategy, costs, roadmap
 - `docs/PostFlow_Tech_Spec.md` — tech spec (API, modules, deployment)
-- `docs/PostFlow_Front_CHECKLIST.md` / `docs/PostFlow_Back_CHECKLIST.md` — implementation checklists
+- `docs/PostFlow_Front_CHECKLIST.md` / `docs/PostFlow_Back_CHECKLIST.md` —
+  implementation checklists
 
 ---
 
@@ -87,19 +89,19 @@ type(scope): description
 
 Supported types:
 
-| Type | When to use |
-| --- | --- |
-| `feat` | new functionality |
-| `fix` | bug fix |
-| `refactor` | refactoring without behavior change |
-| `style` | formatting only (spaces, semicolons, etc.) |
-| `test` | add/update tests |
-| `docs` | documentation only |
-| `chore` | routine tasks (deps, configs, tooling) |
-| `perf` | performance improvements |
-| `ci` | CI/CD pipeline changes |
-| `build` | build system changes |
-| `revert` | revert a previous commit |
+| Type       | When to use                                |
+| ---------- | ------------------------------------------ |
+| `feat`     | new functionality                          |
+| `fix`      | bug fix                                    |
+| `refactor` | refactoring without behavior change        |
+| `style`    | formatting only (spaces, semicolons, etc.) |
+| `test`     | add/update tests                           |
+| `docs`     | documentation only                         |
+| `chore`    | routine tasks (deps, configs, tooling)     |
+| `perf`     | performance improvements                   |
+| `ci`       | CI/CD pipeline changes                     |
+| `build`    | build system changes                       |
+| `revert`   | revert a previous commit                   |
 
 Examples:
 

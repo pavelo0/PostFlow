@@ -26,8 +26,7 @@
 
 - React 18 + Vite 5 + TypeScript
 - Tailwind + shadcn/ui
-- TanStack Query v5
-- Zustand
+- Redux Toolkit (RTK) + RTK Query
 - React Router v6
 - Clerk
 - React Hook Form + Zod
@@ -151,11 +150,11 @@
 
 ## 7) Frontend — структура и страницы
 
-Соответствует фронт-чеклисту (React Router).
+Соответствует фронт-чеклисту и порядку экранов в `PostFlow_Front_PAGES`.
 
 ### Структура папок
 
-- `app/`, `components/`, `hooks/`, `lib/`, `types/`
+- `app/`, `pages/`, `layouts/`, `features/`, `shared/`
 
 ### Роуты
 

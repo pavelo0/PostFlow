@@ -1,6 +1,8 @@
 .DS_Store
 image
 node_modules
+.env
+.env.local
 
 # builds
 dist

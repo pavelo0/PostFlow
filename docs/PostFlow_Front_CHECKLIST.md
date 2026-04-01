@@ -1,217 +1,168 @@
-# PostFlow — Frontend Checklist
+# PostFlow — Frontend Checklist (по хронологии)
 
-> Стек: React 18 + Vite 5 + TypeScript + Tailwind + shadcn/ui + TanStack Query
-> v5 + Zustand + React Router v6 + Clerk
-
----
-
-## Блок 1 — Конфиг проекта
-
-- Создать Vite + React + TypeScript проект
-- Установить все зависимости (react-router-dom, tanstack/react-query, axios,
-zustand, react-hook-form, zod, clerk, date-fns, sonner, clsx,
-tailwind-merge)
-- Настроить Tailwind CSS
-- Инициализировать shadcn/ui
-- Установить нужные shadcn компоненты (button, input, textarea, dialog,
-table, badge, skeleton, calendar, tabs, card, select, popover, sheet,
-tooltip, dropdown-menu)
-- Настроить path alias `@/` → `src/`
-- Создать `.env.local` и `.env.example`
-- Настроить `main.tsx` — обернуть в ClerkProvider + QueryClientProvider +
-BrowserRouter
-- Настроить тему (dark/light) через CSS переменные shadcn
+> **Цель:** собирать UI в том же порядке, как спроектированы экраны (см. `docs/PostFlow_Front_PAGES`).  
+> **Стек:** React + Vite + TypeScript + Tailwind + shadcn/ui + **Redux Toolkit (RTK + RTK Query)** + React Router + Clerk.
 
 ---
 
-## Блок 2 — Структура папок
+## Фаза 0 — Фундамент проекта (один раз)
 
-- Создать папки: `app/`, `components/`, `hooks/`, `lib/`, `types/`
-- Создать все файлы-заглушки для страниц и компонентов
-- Описать все TypeScript типы в `types/index.ts` (User, Channel, Post,
-ApiResponse)
-- Создать `lib/api.ts` — axios instance с базовым URL и Clerk JWT в
-заголовках
-- Создать `lib/store.ts` — базовый Zustand store (selectedChannelId, theme)
-- Создать `lib/utils.ts` — вспомогательные функции
-
----
-
-## Блок 3 — Роутинг (голое дерево без UI)
-
-- Настроить `BrowserRouter` в `main.tsx`
-- Создать корневой `App.tsx` с деревом роутов
-- Добавить публичный роут `/auth`
-- Создать `ProtectedRoute` обёртку (редирект на `/auth` если не авторизован)
-- Добавить роут `/dashboard` внутри ProtectedRoute
-- Добавить роут `/channels` внутри ProtectedRoute
-- Добавить роут `/posts` внутри ProtectedRoute
-- Добавить роут `/posts/new` внутри ProtectedRoute
-- Добавить роут `/posts/:id/edit` внутри ProtectedRoute
-- Добавить роут `/calendar` внутри ProtectedRoute
-- Добавить роут `/analytics` внутри ProtectedRoute
-- Добавить роут `/settings` внутри ProtectedRoute
-- Добавить редирект с `/` на `/dashboard`
-- Добавить 404 страницу
-- Проверить что все роуты открываются (заглушки)
+- [ ] Установить зависимости (react-router-dom, @reduxjs/toolkit, react-redux, react-hook-form, zod, @clerk/clerk-react, date-fns, sonner, clsx, tailwind-merge)
+- [ ] Настроить Tailwind
+- [ ] Инициализировать shadcn/ui + установить нужные компоненты
+- [ ] Настроить import alias `@/` → `src/`
+- [ ] `.env.local` + `.env.example`
+- [ ] Настроить тему (dark/light) через CSS переменные shadcn (класс `.dark`)
+- [ ] `main.tsx`: `ClerkProvider` + `Redux Provider` + `BrowserRouter`
 
 ---
 
-## Блок 4 — Layout (оболочка дашборда)
+## Фаза 1 — Сначала каркас роутинга (без дизайна)
 
-- Создать `DashboardLayout.tsx` с сайдбаром и хедером
-- Создать `Sidebar.tsx` — навигация, логотип, аватар пользователя внизу
-- Создать `Header.tsx` — заголовок страницы, кнопка New Post, переключатель
-темы
-- Создать `ThemeToggle.tsx` — переключатель dark/light, сохранять в
-localStorage
-- Подключить `DashboardLayout` ко всем защищённым роутам через `<Outlet />`
-- Отметить активный пункт меню в сайдбаре по текущему роуту
+### 1.1 Создать структуру папок
 
----
+- [ ] Создать: `app/`, `pages/`, `layouts/`, `features/`, `shared/`
+- [ ] Типы в `shared/types/index.ts` (User, Channel, Post, ApiResponse)
+- [ ] Redux store в `shared/store/store.ts` (configureStore)
+- [ ] RTK Query base API в `shared/api/baseApi.ts` (createApi + fetchBaseQuery)
+  - [ ] baseUrl из env
+  - [ ] Clerk JWT → заголовок `Authorization`
+  - [ ] tagTypes + стратегия тегов (`providesTags/invalidatesTags`)
 
-## Блок 5 — Авторизация
+### 1.2 Дерево роутов + заглушки страниц
 
-- Создать страницу `/auth` с вкладками Sign In / Sign Up
-- Встроить Clerk `<SignIn />` и `<SignUp />` компоненты
-- Настроить редирект после входа на `/dashboard`
-- После первого входа вызвать `POST /auth/sync` на бекенде
-- Добавить кнопку выхода в сайдбар через Clerk
-
----
-
-## Блок 6 — TanStack Query хуки
-
-- `useChannels()` — список каналов
-- `useCreateChannel()` — создание канала
-- `useDeleteChannel()` — удаление канала
-- `useVerifyChannel()` — проверка соединения
-- `usePosts(filters)` — список постов с фильтрами
-- `usePost(id)` — один пост
-- `useCreatePost()` — создание поста
-- `useUpdatePost()` — обновление поста
-- `useDeletePost()` — удаление поста
-- `useDuplicatePost()` — дублирование поста
-- `useSendNow()` — немедленная отправка
-- `useStats()` — статистика для дашборда
-- Настроить `invalidateQueries` после каждой мутации
+- [ ] Публичные роуты:
+  - [ ] `/` → `LandingPage` (заглушка)
+  - [ ] `/auth` → `AuthPage` (заглушка)
+- [ ] Защищённые роуты (только для авторизованных):
+  - [ ] `/onboarding` → `OnboardingPage` (заглушка)
+  - [ ] `/dashboard` → `DashboardPage` (заглушка)
+  - [ ] `/posts` → `PostsPage` (заглушка)
+  - [ ] `/posts/new` → `PostEditorPage` (заглушка)
+  - [ ] `/posts/:id/edit` → `PostEditorPage` (режим редактирования, заглушка)
+  - [ ] `/calendar` → `CalendarPage` (заглушка)
+  - [ ] `/channels` → `ChannelsPage` (заглушка)
+  - [ ] `/analytics` → `AnalyticsPage` (заглушка)
+  - [ ] `/settings` → `SettingsPage` (заглушка)
+- [ ] Страница 404
+- [ ] Проверить, что навигация работает по всем роутам (пока просто заглушки)
 
 ---
 
-## Блок 7 — Страница Channels
+## Фаза 2 — Landing Page (`/`)
 
-- Таблица каналов с колонками: название, chat_id, статус, дата, действия
-- Статус бота: Connected / Error / Not verified (цветные бейджи)
-- Кнопки Verify и Delete на каждой строке
-- Модалка добавления канала (3 шага: инструкция → ввод данных → успех)
-- Поле bot_token с show/hide переключателем
-- Кнопка "Test connection" с состояниями: loading → success / error
-- Кнопка Save заблокирована до успешной проверки
-- Empty state когда каналов нет
-- Skeleton при загрузке
+Собрать лендинг “Grow without the grind” (секции из `PostFlow_Front_PAGES`):
+
+- [ ] Hero (заголовок + electric-violet градиент + мокап + social proof)
+- [ ] Features grid (6 bento-карточек)
+- [ ] How it works (Connect → Compose → Schedule)
+- [ ] Pricing (Free/Pro/Business, выделить “Most Popular”)
+- [ ] CTA → `/auth`
 
 ---
 
-## Блок 8 — Редактор поста
+## Фаза 3 — Auth (`/auth`)
 
-- `FormatToolbar.tsx` — кнопки B / I / Code / Link
-- Textarea с placeholder и счётчиком символов
-- `TelegramPreview.tsx` — тёмный фон, пузырь, рендер HTML тегов
-- Превью медиа в пузыре
-- `MediaUpload.tsx` — drag & drop зона, загрузка на бек, превью, удалить
-- `SchedulePicker.tsx` — DatePicker + TimePicker + селект таймзоны
-- Дропдаун выбора канала
-- Кнопки "Send now" и "Schedule"
-- Форма на React Hook Form + Zod валидация
-- Страница `/posts/new`
-- Страница `/posts/:id/edit` — загрузить данные, заполнить форму
+- [ ] Двухпанельный layout (слева бренд, справа карточка авторизации)
+- [ ] Табы: Sign in / Create account
+- [ ] Интеграция Clerk (`<SignIn />`, `<SignUp />` или кастомная форма на Clerk)
+- [ ] Редирект после входа:
+  - [ ] Если каналов ещё нет → `/onboarding`
+  - [ ] Иначе → `/dashboard`
+- [ ] После первого входа вызвать `POST /auth/sync`
 
 ---
 
-## Блок 9 — Страница Posts (история)
+## Фаза 4 — Onboarding (`/onboarding`)
 
-- Таблица постов: превью, канал, запланировано, отправлено, статус, действия
-- `StatusBadge.tsx` — pending / scheduled / sent / failed с цветами
-- Failed строки с красной левой границей
-- Фильтр по каналу
-- Фильтр по статусу (табы: All / Scheduled / Sent / Failed)
-- Фильтр по диапазону дат
-- Поиск по тексту
-- Действия на строке: Edit / Duplicate / Delete
-- Bulk actions: выбрать несколько → удалить
-- Пагинация
-- Empty state
-- Skeleton при загрузке
+Мастер настройки из 3 шагов как в `PostFlow_Front_PAGES`:
+
+- [ ] Шаг 1: инструкция по BotFather
+- [ ] Шаг 2: форма подключения (Bot Token + Channel ID)
+  - [ ] “Test connection” (loading/success/error)
+  - [ ] Save выключена, пока не verified
+- [ ] Шаг 3: success-экран + CTA “Create first post” → `/posts/new`
 
 ---
 
-## Блок 10 — Дашборд
+## Фаза 5 — Shell для авторизованных (layout)
 
-- `StatCard.tsx` — число, подпись, мини-график
-- 3 карточки: Scheduled / Sent this month / Failed
-- Карточка Failed красная если > 0
-- `UpcomingPosts.tsx` — список ближайших 5 постов
-- Кнопка "View all" → /posts
-- Быстрый доступ к созданию поста
-- Empty state когда постов нет
-- Skeleton при загрузке
+- [ ] `DashboardLayout` (Sidebar + Header + `<Outlet />`)
+- [ ] Навигация в сайдбаре: Dashboard / Posts / Calendar / Channels / Analytics / Settings
+- [ ] Header: заголовок страницы, theme toggle, глобальная кнопка “New Post”
+- [ ] Theme toggle сохранять в localStorage
+- [ ] Toast-система (Sonner) подключена один раз на корне приложения
 
 ---
 
-## Блок 11 — Страница Calendar
+## Фаза 6 — Dashboard (`/dashboard`)
 
-- Сетка месяца (7 колонок, строки по неделям)
-- Навигация по месяцам
-- Текущий день выделен
-- Карточки постов в ячейках с цветом по статусу
-- "+ N more" если постов больше 3 в день
-- Клик на пост — открыть редактор
-- Клик на пустой день — создать пост с этой датой
-- Переключатель Week / Month
-- Skeleton при загрузке
+По `PostFlow_Front_PAGES`:
+
+- [ ] Ряд стат-карточек (Scheduled + sparkline, Sent, Failed подсветить если >0)
+- [ ] Список Upcoming posts (следующие запланированные)
+- [ ] Recent activity timeline (правая колонка)
+- [ ] Your channels (горизонтальный список + status dots)
+- [ ] Loading states (skeletons) + empty states
 
 ---
 
-## Блок 12 — Страница Analytics
+## Фаза 7 — Post Editor (`/posts/new`, `/posts/:id/edit`)
 
-- 4 stat-карточки: опубликовано / success rate / среднее в день / активных
-каналов
-- График активности по дням (recharts)
-- График по каналам
-- График по часам дня
-- Фильтр по периоду: 7д / 30д / 90д
-- Фильтр по каналу
-- Empty state если данных мало
-- Skeleton при загрузке
-
----
-
-## Блок 13 — Страница Settings
-
-- Табы: Profile / Notifications / Billing / Danger zone
-- Profile: форма с именем, email, таймзоной, аватаром
-- Notifications: тогглы для email уведомлений
-- Billing: текущий план, usage bars, карточки планов
-- Danger zone: удаление аккаунта с подтверждением
+- [ ] Split layout 60/40 (editor/preview)
+- [ ] Formatting toolbar (B / I / Code / Link)
+- [ ] Textarea + счётчик символов
+- [ ] Telegram dark-mode live preview (HTML теги)
+- [ ] Media upload зона + превью
+- [ ] Bottom bar: выбор канала + date/time picker
+- [ ] Действия: Schedule / Send now
+- [ ] RHF + Zod validation
 
 ---
 
-## Блок 14 — Shared компоненты
+## Фаза 8 — Calendar (`/calendar`)
 
-- `EmptyState.tsx` — иллюстрация + текст + CTA кнопка
-- `ConfirmDialog.tsx` — модалка подтверждения опасных действий
-- `LoadingSpinner.tsx`
-- Toast уведомления через Sonner на каждое действие
-- Skeleton на всех загружаемых блоках
+- [ ] Month view (плашки по статусам)
+- [ ] Week view
+- [ ] Сайдбар “Scheduled this week”
+- [ ] Клик по посту → открыть редактор; клик по пустому слоту → создать пост
+- [ ] Skeletons/empty states
 
 ---
 
-## Блок 15 — Деплой
+## Фаза 9 — Posts History (`/posts`)
 
-- Создать репозиторий на GitHub
-- Подключить репозиторий к Vercel
-- Добавить env переменные в Vercel
-- Настроить `vercel.json` для SPA (редирект всех роутов на index.html)
-- Проверить прод сборку локально
-- Задеплоить и проверить все страницы в проде
+- [ ] Filter bar (канал, статус, диапазон дат, поиск)
+- [ ] Data table + bulk actions (duplicate/delete)
+- [ ] Опционально: edit drawer справа для быстрых правок
+- [ ] Pagination
+- [ ] Skeletons/empty states
+
+---
+
+## Фаза 10 — Channels (`/channels`)
+
+- [ ] Карточки/грид каналов со статусом + member counts
+- [ ] Действия: Verify / Edit / Remove
+- [ ] Add channel modal (переиспользует onboarding flow)
+
+---
+
+## Фаза 11 — Analytics (`/analytics`) + Settings (`/settings`)
+
+- [ ] Analytics: ключевые метрики + график активности + разбивка по каналам (MVP или заглушки)
+- [ ] Settings: профиль + уведомления + биллинг (в MVP можно заглушки)
+
+---
+
+## Фаза 12 — RTK Query endpoints (делаем “по мере надобности”)
+
+Вместо того, чтобы делать весь API сразу, добавляем endpoints **по мере того, как они нужны конкретному экрану**:
+
+- [ ] `features/channels/api/channelsApi.ts` (get/create/delete/verify)
+- [ ] `features/posts/api/postsApi.ts` (get list, get one, create, update, delete, duplicate, send-now, stats)
+- [ ] Теги:
+  - [ ] `Channels` инвалидировать при create/delete/verify
+  - [ ] `Posts` инвалидировать при create/update/delete/duplicate/send-now
+  - [ ] `Stats` инвалидировать при действиях, которые меняют счётчики
 

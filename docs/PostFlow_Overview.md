@@ -49,7 +49,7 @@ MVP соответствует чеклистам `PostFlow_Front_CHECKLIST.md` 
 
 ## 4) Техстек (как в чеклистах)
 
-- **Frontend**: React 18 + Vite 5 + TypeScript + Tailwind + shadcn/ui + TanStack Query v5 + Zustand + React Router v6 + Clerk
+- **Frontend**: React 18 + Vite 5 + TypeScript + Tailwind + shadcn/ui + Redux Toolkit (RTK + RTK Query) + React Router v6 + Clerk
 - **Backend**: NestJS 10 + TypeScript + Prisma + PostgreSQL + Redis + BullMQ + Clerk + Cloudflare R2
 - **Deploy/Infra**: Vercel (front), Railway (back + Postgres + Redis), Cloudflare R2 (storage)
 

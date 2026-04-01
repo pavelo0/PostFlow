@@ -1,0 +1,124 @@
+# PostFlow: Detailed Screen Breakdown
+
+This document provides a comprehensive overview of the key screens designed for
+the PostFlow Telegram scheduling platform.
+
+---
+
+## 1. Landing Page (`/`)
+
+**The "Grow without the grind" Gateway**
+
+- **Hero Section:** A high-impact headline with an electric-violet gradient.
+  Includes a clean browser mockup showing the app in action and social proof
+  (star ratings and user avatars).
+- **Features Grid:** Six bento-style cards highlighting key value propositions:
+  precision scheduling, real Telegram previews, multi-channel management, media
+  support, analytics, and bot control.
+- **How it Works:** A simple three-step horizontal guide (Connect → Compose →
+  Schedule).
+- **Pricing:** A clean three-tier comparison (Free, Pro, Business) with clear
+  feature checklists and a "Most Popular" highlight for the Pro plan.
+
+## 2. Auth Page (`/auth`)
+
+**The Dual-Pane Entry**
+
+- **Left Side:** A minimalist branding area with a product value statement and
+  subtle visual elements.
+- **Right Side:** The functional core. A clean card featuring a tab switcher
+  between "Sign in" and "Create account." Includes standard email/password
+  fields, a "Forgot password" link, and a prominent Google OAuth button for
+  quick access.
+
+## 3. Onboarding (`/onboarding`)
+
+**The 3-Step Setup Wizard**
+
+- **Step 1 (Welcome):** Clear instructions on how to create a Telegram bot via
+  @BotFather.
+- **Step 2 (Connection):** A focused form for pasting the Bot API Token and
+  entering a Channel ID. Includes a "Test Connection" action with inline
+  validation (success/error states).
+- **Step 3 (Success):** A celebratory confirmation screen with a summary of the
+  connected channel and a primary CTA to create the first post.
+
+## 4. Dashboard (`/dashboard`)
+
+**The Command Center**
+
+- **Stats Row:** Three high-level cards showing Scheduled Posts (with
+  sparkline), Sent Posts, and Failed Deliveries (highlighted in red if > 0).
+- **Upcoming Posts:** A prioritized list of the next scheduled content,
+  including channel indicators, truncated previews, and status badges.
+- **Recent Activity:** A sidebar timeline tracking successful sends, new
+  connections, and errors.
+- **Your Channels:** A horizontal scroll of connected Telegram channels with
+  real-time status dots.
+
+## 5. Post Editor (`/posts/new`)
+
+**The Focused Creator Environment**
+
+- **Split Layout:** A 60/40 split between creation and preview.
+- **Left Panel (Editor):** A clean writing area with a formatting toolbar (Bold,
+  Italic, Code, Link), media upload zone, and character counter.
+- **Right Panel (Live Preview):** A pixel-perfect Telegram "Dark Mode" mockup.
+  As you type, it renders the message bubble exactly as it will appear on a
+  phone, including HTML formatting and media.
+- **Bottom Bar:** Controls for selecting target channels and picking the exact
+  date/time for scheduling.
+
+## 6. Calendar (`/calendar`)
+
+**The Content Timeline**
+
+- **Month View:** A standard grid showing the distribution of posts throughout
+  the month. Status-colored pills (Purple for scheduled, Green for sent, Red for
+  failed) provide instant visual feedback.
+- **Week View:** A more granular time-slot grid for precise scheduling.
+- **Sidebar:** A chronological list of "Scheduled this week" for quick
+  reference.
+
+## 7. Posts History (`/posts`)
+
+**The Archive & Management Hub**
+
+- **Filter Bar:** Robust tools to search and filter posts by channel, status
+  (Sent, Scheduled, Failed), and date range.
+- **Data Table:** A detailed list view with thumbnails, channel badges, and
+  timestamps. Supports bulk actions like duplicate and delete.
+- **Edit Drawer:** Selecting a post slides out a focused editing interface from
+  the right, allowing for quick tweaks without leaving the page.
+
+## 8. Channels (`/channels`)
+
+**Network Management**
+
+- **Channel Cards:** A grid of connected channels showing member counts, health
+  status, and linked bot information.
+- **Actions:** Quick links to verify connections, edit settings, or remove
+  channels.
+- **Add Channel Modal:** A step-by-step dialog that replicates the onboarding
+  flow for adding new broadcast networks.
+
+## 9. Analytics (`/analytics`)
+
+**Performance Insights**
+
+- **Key Metrics:** Total published, success rate, and average posts per day.
+- **Activity Chart:** A combined bar/line chart showing publishing volume over
+  time.
+- **Channel Breakdown:** Comparative charts showing which channels are most
+  active and peak engagement times.
+
+## 10. Settings (`/settings`)
+
+**User & Workspace Control**
+
+- **Vertical Navigation:** Quick access to Profile, Notifications, Billing, and
+  API settings.
+- **API & Integrations:** (Pro Feature) Displays API keys and code snippets for
+  developers to automate their workflows programmatically.
+- **Billing:** Usage tracking against plan limits (e.g., "12/20 posts used") and
+  plan management.
