@@ -5,6 +5,9 @@
     "lint-staged": "^16.4.0"
   },
   "scripts": {
+    "fi": "npm run -s install:all",
+    "install:all": "node ./scripts/install-all.mjs",
+    "postinstall": "node ./scripts/install-all.mjs",
     "prepare": "husky",
     "lint": "npm run --prefix frontend lint",
     "typecheck": "npm run --prefix frontend typecheck",
